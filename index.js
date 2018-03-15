@@ -13,9 +13,11 @@ server.on('request', function (request, response) {
         });
     }else {
             response.statusCode = 404;
-            response.write('<h1>404: Zła ścieżka!</h1>');
-            response.write(<img src="https://cdn.pixabay.com/photo/2018/03/02/11/24/smiley-3192989_960_720.png" alt="error"/>)
-            response.end();
+            fs.readFile('./404.jpg', function(err, data) {
+                response.setHeader("Content-Type", "image/img.jpeg");
+                response.write(data);
+                response.end();
+            });
     }
 });
 
